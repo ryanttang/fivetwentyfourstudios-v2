@@ -4,6 +4,11 @@ import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
 import CTABlock from '../components/CTABlock';
 import { motion } from 'framer-motion';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-coverflow';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function Home() {
   return (
@@ -90,6 +95,105 @@ export default function Home() {
               <p className="text-[#F5F6FA]/80 font-body">{["Vision to voice", "Visual identity", "Websites that convert"][i]}</p>
             </motion.div>
           ))}
+        </motion.section>
+
+        {/* Unique Carousel Gallery Section */}
+        <motion.section
+          className="max-w-6xl mx-auto py-20 px-4 my-8 relative overflow-visible bg-transparent"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          {/* Parallax Animated Gradient Background */}
+          <div className="absolute inset-0 -z-10 animate-gradient bg-gradient-to-tr from-orange-400/30 via-[#FFB86C]/20 to-[#F5F6FA]/10 blur-2xl rounded-3xl" style={{ backgroundSize: '200% 200%' }} />
+          <motion.div
+            className="relative mb-8 flex flex-col items-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-[#FFB86C] drop-shadow-lg text-center">
+              Gallery Showcase
+            </h2>
+            <div className="w-full max-w-5xl px-2 sm:px-4">
+              {/* No glassmorphic/gradient container here! */}
+              <Swiper
+                modules={[Navigation, EffectCoverflow, Pagination]}
+                effect="coverflow"
+                coverflowEffect={{
+                  rotate: 32,
+                  stretch: 0,
+                  depth: 220,
+                  modifier: 1.2,
+                  slideShadows: true,
+                }}
+                navigation={{
+                  prevEl: '.custom-swiper-prev',
+                  nextEl: '.custom-swiper-next',
+                }}
+                pagination={{ clickable: true, el: '.custom-swiper-pagination' }}
+                loop={true}
+                centeredSlides={true}
+                spaceBetween={24}
+                slidesPerView={1.25}
+                breakpoints={{
+                  640: { slidesPerView: 2.1, spaceBetween: 24 },
+                  1024: { slidesPerView: 3.1, spaceBetween: 32 },
+                }}
+                className="!pb-8 min-h-[440px]"
+              >
+                {[
+                  { title: 'Brand Identity', desc: 'Modern branding for a creative agency.', image: '/assets/work1.avif' },
+                  { title: 'E-commerce Launch', desc: 'Full-stack online store build.', image: '/assets/work2.avif' },
+                  { title: 'App UI/UX', desc: 'Mobile app interface and experience.', image: '/assets/work3.avif' },
+                  { title: 'Product Campaign', desc: 'Creative direction for product launch.', image: '/assets/work4.avif' },
+                  { title: 'Portfolio Website', desc: 'Personal portfolio for a designer.', image: '/assets/work5.avif' },
+                  { title: 'Corporate Rebrand', desc: 'Rebranding for a large enterprise.', image: '/assets/work6.avif' },
+                  { title: 'Startup MVP', desc: 'Rapid MVP for a tech startup.', image: '/assets/work7.avif' },
+                  { title: 'Event Promo', desc: 'Promotional site for a major event.', image: '/assets/work8.avif' },
+                  { title: 'Nonprofit Site', desc: 'Web presence for a nonprofit.', image: '/assets/work9.avif' },
+                  { title: 'Landing Page', desc: 'High-converting landing page.', image: '/assets/work10.avif' },
+                  { title: 'SaaS Dashboard', desc: 'Analytics dashboard for SaaS.', image: '/assets/work11.avif' },
+                  { title: 'Blog Platform', desc: 'Custom blog and CMS.', image: '/assets/work12.avif' },
+                  { title: 'Photography Gallery', desc: 'Showcase for a photographer.', image: '/assets/work13.avif' },
+                ].map((p, i) => (
+                  <SwiperSlide key={i} className="flex justify-center items-center w-full h-full">
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.07 }}
+                      className="w-full h-full flex justify-center items-center"
+                    >
+                      <div className="w-full h-full flex items-stretch">
+                        {/* Add a strong drop shadow to each card for float effect */}
+                        <div className="shadow-2xl shadow-[#181A20]/60 rounded-3xl">
+                          <ProjectCard title={p.title} desc={p.desc} image={p.image} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  </SwiperSlide>
+                ))}
+                {/* Custom navigation buttons */}
+                <button
+                  aria-label="Previous"
+                  className="custom-swiper-prev absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
+                >
+                  <span className="text-2xl">&#8592;</span>
+                </button>
+                <button
+                  aria-label="Next"
+                  className="custom-swiper-next absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
+                >
+                  <span className="text-2xl">&#8594;</span>
+                </button>
+              </Swiper>
+              {/* Animated Pagination Dots */}
+              <div className="custom-swiper-pagination flex justify-center gap-2 mt-6" />
+            </div>
+          </motion.div>
         </motion.section>
 
         {/* Services & Pricing Section */}
