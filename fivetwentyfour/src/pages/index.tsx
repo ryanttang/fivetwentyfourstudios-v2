@@ -11,9 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function Home() {
-  const [expandedService, setExpandedService] = useState<null | number>(null);
   const [modalProject, setModalProject] = useState<null | { title: string; desc: string; image: string }>(null);
-  const [pricingHover, setPricingHover] = useState<null | number>(null);
   const [modalTeam, setModalTeam] = useState<null | { name: string; role: string; bio: string; photo: string }>(null);
   return (
     <>
@@ -97,33 +95,14 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          {["Strategy", "Design", "Launch"].map((service, i) => (
+          {['Strategy', 'Design', 'Launch'].map((service, i) => (
             <motion.div
               key={service}
-              className={`neumorphic rounded-xl p-8 text-center cursor-pointer transition-transform duration-200 relative ${expandedService === i ? 'z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl' : 'hover:scale-105'}`}
-              whileHover={expandedService === i ? {} : { scale: 1.05, boxShadow: '0 8px 32px 0 rgba(31,38,135,0.10)' }}
-              onClick={() => setExpandedService(expandedService === i ? null : i)}
-              tabIndex={0}
-              aria-expanded={expandedService === i}
-              aria-label={service + (expandedService === i ? ' details expanded' : '')}
+              className="neumorphic rounded-xl p-8 text-center transition-transform duration-200 relative z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl card-hover-gradient"
             >
+              <div className="card-gradient-overlay" />
               <h3 className="text-[#FFB86C] text-xl font-semibold mb-2 font-heading">{service}</h3>
-              <p className="text-[#F5F6FA]/80 font-body">{["Vision to voice", "Visual identity", "Websites that convert"][i]}</p>
-              {expandedService === i && (
-                <div className="mt-6 text-[#F5F6FA] text-base font-body animate-fade-in">
-                  {[
-                    'We help you clarify your brand vision, audience, and messaging. Workshops, research, and actionable strategy to set you apart.',
-                    'We craft a unique visual identity, logo, color palette, and design system that brings your brand to life across all touchpoints.',
-                    'We build and launch beautiful, high-converting websites and digital experiences, optimized for your goals and growth.'
-                  ][i]}
-                  <button
-                    className="block mx-auto mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
-                    onClick={e => { e.stopPropagation(); setExpandedService(null); }}
-                  >
-                    Close
-                  </button>
-                </div>
-              )}
+              <p className="text-[#F5F6FA]/80 font-body">{['Vision to voice', 'Visual identity', 'Websites that convert'][i]}</p>
             </motion.div>
           ))}
         </motion.section>
@@ -275,30 +254,24 @@ export default function Home() {
             ].map((pkg, i) => (
               <motion.div
                 key={pkg.name}
-                className={`flex-1 neumorphic rounded-2xl p-8 flex flex-col items-center text-center transition font-body relative ${pricingHover === i ? 'z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl' : 'hover:scale-105'}`}
-                whileHover={pricingHover === i ? {} : { scale: 1.04 }}
-                onMouseEnter={() => setPricingHover(i)}
-                onMouseLeave={() => setPricingHover(null)}
-                tabIndex={0}
-                aria-label={pkg.name + (pricingHover === i ? ' details expanded' : '')}
+                className="flex-1 neumorphic rounded-2xl p-8 flex flex-col items-center text-center transition font-body relative z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl card-hover-gradient"
               >
+                <div className="card-gradient-overlay" />
                 <h3 className="text-[#FFB86C] text-lg font-semibold mb-2 font-heading">{pkg.name}</h3>
                 <p className="text-[#F5F6FA]/80 mb-6">{pkg.desc}</p>
                 <div className="text-2xl font-bold text-[#FFB86C] mt-auto">{pkg.price}</div>
-                {pricingHover === i && (
-                  <div className="mt-4 text-[#F5F6FA] text-base font-body animate-fade-in">
-                    {pkg.details}
-                    <button
-                      className="block mx-auto mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
-                      onClick={() => {
-                        const el = document.getElementById('cta-contact');
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                    >
-                      Get Started
-                    </button>
-                  </div>
-                )}
+                <div className="mt-4 text-[#F5F6FA] text-base font-body animate-fade-in">
+                  {pkg.details}
+                  <button
+                    className="block mx-auto mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
+                    onClick={() => {
+                      const el = document.getElementById('cta-contact');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    Get Started
+                  </button>
+                </div>
               </motion.div>
             ))}
           </div>
