@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 py-20 px-4 items-center relative overflow-hidden">
+        <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 py-10 px-4 items-center relative overflow-hidden">
           {/* Background YouTube Video */}
           <div className="youtube-bg-wrapper absolute inset-0 w-full h-full z-0 pointer-events-none">
             <iframe
@@ -79,7 +79,7 @@ export default function Home() {
 
         {/* Services Row */}
         <motion.section
-          className="max-w-6xl mx-auto glassmorphic grid grid-cols-1 md:grid-cols-3 gap-10 py-10 px-4"
+          className="max-w-6xl mx-auto glassmorphic grid grid-cols-1 md:grid-cols-3 gap-8 py-6 px-4 my-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -99,16 +99,16 @@ export default function Home() {
 
         {/* Unique Carousel Gallery Section */}
         <motion.section
-          className="max-w-6xl mx-auto py-20 px-4 my-8 relative overflow-visible bg-transparent"
+          className="max-w-6xl mx-auto py-10 px-4 my-6 relative overflow-visible bg-transparent"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
           {/* Parallax Animated Gradient Background */}
-          <div className="absolute inset-0 -z-10 animate-gradient bg-gradient-to-tr from-orange-400/30 via-[#FFB86C]/20 to-[#F5F6FA]/10 blur-2xl rounded-3xl" style={{ backgroundSize: '200% 200%' }} />
+          {/* Removed orange animated gradient background for a neutral look */}
           <motion.div
-            className="relative mb-8 flex flex-col items-center"
+            className="relative flex flex-col justify-center items-center min-h-[500px] mb-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -117,8 +117,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6 text-[#FFB86C] drop-shadow-lg text-center">
               Gallery Showcase
             </h2>
-            <div className="w-full max-w-5xl px-2 sm:px-4">
-              {/* No glassmorphic/gradient container here! */}
+            <div className="w-full max-w-5xl px-2 sm:px-4 relative">
               <Swiper
                 modules={[Navigation, EffectCoverflow, Pagination]}
                 effect="coverflow"
@@ -144,52 +143,52 @@ export default function Home() {
                 }}
                 className="!pb-8 min-h-[440px]"
               >
-                {[
-                  { title: 'Brand Identity', desc: 'Modern branding for a creative agency.', image: '/assets/work1.avif' },
-                  { title: 'E-commerce Launch', desc: 'Full-stack online store build.', image: '/assets/work2.avif' },
-                  { title: 'App UI/UX', desc: 'Mobile app interface and experience.', image: '/assets/work3.avif' },
-                  { title: 'Product Campaign', desc: 'Creative direction for product launch.', image: '/assets/work4.avif' },
-                  { title: 'Portfolio Website', desc: 'Personal portfolio for a designer.', image: '/assets/work5.avif' },
-                  { title: 'Corporate Rebrand', desc: 'Rebranding for a large enterprise.', image: '/assets/work6.avif' },
-                  { title: 'Startup MVP', desc: 'Rapid MVP for a tech startup.', image: '/assets/work7.avif' },
-                  { title: 'Event Promo', desc: 'Promotional site for a major event.', image: '/assets/work8.avif' },
-                  { title: 'Nonprofit Site', desc: 'Web presence for a nonprofit.', image: '/assets/work9.avif' },
-                  { title: 'Landing Page', desc: 'High-converting landing page.', image: '/assets/work10.avif' },
-                  { title: 'SaaS Dashboard', desc: 'Analytics dashboard for SaaS.', image: '/assets/work11.avif' },
-                  { title: 'Blog Platform', desc: 'Custom blog and CMS.', image: '/assets/work12.avif' },
-                  { title: 'Photography Gallery', desc: 'Showcase for a photographer.', image: '/assets/work13.avif' },
-                ].map((p, i) => (
-                  <SwiperSlide key={i} className="flex justify-center items-center w-full h-full">
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.07 }}
-                      className="w-full h-full flex justify-center items-center"
-                    >
-                      <div className="w-full h-full flex items-stretch">
-                        {/* Add a strong drop shadow to each card for float effect */}
-                        <div className="shadow-2xl shadow-[#181A20]/60 rounded-3xl">
-                          <ProjectCard title={p.title} desc={p.desc} image={p.image} />
+                  {[
+                    { title: 'Brand Identity', desc: 'Modern branding for a creative agency.', image: '/assets/work1.avif' },
+                    { title: 'E-commerce Launch', desc: 'Full-stack online store build.', image: '/assets/work2.avif' },
+                    { title: 'App UI/UX', desc: 'Mobile app interface and experience.', image: '/assets/work3.avif' },
+                    { title: 'Product Campaign', desc: 'Creative direction for product launch.', image: '/assets/work4.avif' },
+                    { title: 'Portfolio Website', desc: 'Personal portfolio for a designer.', image: '/assets/work5.avif' },
+                    { title: 'Corporate Rebrand', desc: 'Rebranding for a large enterprise.', image: '/assets/work6.avif' },
+                    { title: 'Startup MVP', desc: 'Rapid MVP for a tech startup.', image: '/assets/work7.avif' },
+                    { title: 'Event Promo', desc: 'Promotional site for a major event.', image: '/assets/work8.avif' },
+                    { title: 'Nonprofit Site', desc: 'Web presence for a nonprofit.', image: '/assets/work9.avif' },
+                    { title: 'Landing Page', desc: 'High-converting landing page.', image: '/assets/work10.avif' },
+                    { title: 'SaaS Dashboard', desc: 'Analytics dashboard for SaaS.', image: '/assets/work11.avif' },
+                    { title: 'Blog Platform', desc: 'Custom blog and CMS.', image: '/assets/work12.avif' },
+                    { title: 'Photography Gallery', desc: 'Showcase for a photographer.', image: '/assets/work13.avif' },
+                  ].map((p, i) => (
+                    <SwiperSlide key={i} className="flex justify-center items-center w-full h-full">
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: i * 0.07 }}
+                        className="w-full h-full flex justify-center items-center"
+                      >
+                        <div className="w-full h-full flex items-stretch">
+                          {/* Add a strong drop shadow to each card for float effect */}
+                          <div className="shadow-2xl shadow-[#181A20]/60 rounded-3xl">
+                            <ProjectCard title={p.title} desc={p.desc} image={p.image} />
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  </SwiperSlide>
-                ))}
-                {/* Custom navigation buttons */}
-                <button
-                  aria-label="Previous"
-                  className="custom-swiper-prev absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
-                >
-                  <span className="text-2xl">&#8592;</span>
-                </button>
-                <button
-                  aria-label="Next"
-                  className="custom-swiper-next absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
-                >
-                  <span className="text-2xl">&#8594;</span>
-                </button>
-              </Swiper>
+                      </motion.div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              {/* Custom navigation buttons, now visually outside the carousel */}
+              <button
+                aria-label="Previous"
+                className="custom-swiper-prev absolute -left-12 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
+              >
+                <span className="text-2xl">&#8592;</span>
+              </button>
+              <button
+                aria-label="Next"
+                className="custom-swiper-next absolute -right-12 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/20 border border-orange-200 transition backdrop-blur-lg bg-white/10 hover:scale-110 rounded-full"
+              >
+                <span className="text-2xl">&#8594;</span>
+              </button>
               {/* Animated Pagination Dots */}
               <div className="custom-swiper-pagination flex justify-center gap-2 mt-6" />
             </div>
@@ -198,7 +197,7 @@ export default function Home() {
 
         {/* Services & Pricing Section */}
         <motion.section
-          className="max-w-4xl mx-auto glassmorphic py-14 px-6 flex flex-col items-center my-16"
+          className="max-w-4xl mx-auto glassmorphic py-8 px-6 flex flex-col items-center my-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -238,7 +237,7 @@ export default function Home() {
 
         {/* Values Section */}
         <motion.section
-          className="max-w-2xl mx-auto glassmorphic rounded-3xl py-14 px-6 text-center my-16 relative"
+          className="max-w-2xl mx-auto glassmorphic rounded-3xl py-8 px-6 text-center my-8 relative"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -249,9 +248,140 @@ export default function Home() {
           <p className="max-w-xl mx-auto text-lg text-[#F5F6FA]/80 font-body">We believe small businesses deserve big agency thinking. Human-centered, creative, and always approachable.</p>
         </motion.section>
 
+        {/* About/Team Section */}
+        <motion.section
+          className="max-w-3xl mx-auto glassmorphic rounded-3xl py-10 px-6 text-center my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-heading font-bold mb-4">About Us</h2>
+          <p className="text-lg text-[#F5F6FA]/80 font-body mb-4">We are a passionate team of designers, strategists, and technologists dedicated to helping soulful brands shine online. Our mission is to bring big agency thinking to small businesses, with a personal touch.</p>
+          {/* Optionally add a team photo or founder image here */}
+        </motion.section>
+
+        {/* Client Logos / Past Clients Section */}
+        <motion.section
+          className="max-w-4xl mx-auto py-8 px-6 flex flex-col items-center my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-xl font-heading font-bold mb-6">Brands We've Worked With</h2>
+          <div className="flex flex-wrap justify-center gap-8 opacity-80">
+            {/* Placeholder logos, replace with real client logos */}
+            <div className="w-32 h-12 bg-[#F5EFE6] rounded-lg flex items-center justify-center text-[#D96C3A] font-bold text-lg">Client 1</div>
+            <div className="w-32 h-12 bg-[#F5EFE6] rounded-lg flex items-center justify-center text-[#D96C3A] font-bold text-lg">Client 2</div>
+            <div className="w-32 h-12 bg-[#F5EFE6] rounded-lg flex items-center justify-center text-[#D96C3A] font-bold text-lg">Client 3</div>
+            <div className="w-32 h-12 bg-[#F5EFE6] rounded-lg flex items-center justify-center text-[#D96C3A] font-bold text-lg">Client 4</div>
+          </div>
+        </motion.section>
+
+        {/* Testimonials Section */}
+        <motion.section
+          className="max-w-3xl mx-auto glassmorphic rounded-3xl py-10 px-6 text-center my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-heading font-bold mb-6">What Our Clients Say</h2>
+          <div className="flex flex-col md:flex-row gap-8 justify-center">
+            <div className="flex-1 bg-[#F5EFE6]/80 rounded-xl p-6 text-[#181A20] shadow">
+              <p className="italic mb-2">“Absolutely transformed our brand presence. The team was creative, responsive, and a joy to work with!”</p>
+              <div className="font-bold text-[#D96C3A]">— Alex, Founder</div>
+            </div>
+            <div className="flex-1 bg-[#F5EFE6]/80 rounded-xl p-6 text-[#181A20] shadow">
+              <p className="italic mb-2">“Professional, talented, and truly understood our vision from day one.”</p>
+              <div className="font-bold text-[#D96C3A]">— Jamie, CEO</div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Process Overview Section */}
+        <motion.section
+          className="max-w-4xl mx-auto py-10 px-6 my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-heading font-bold mb-6 text-center">Our Process</h2>
+          <div className="flex flex-col md:flex-row gap-8 justify-center">
+            <div className="flex-1 text-center">
+              <div className="w-12 h-12 mx-auto mb-2 bg-[#FFB86C]/30 rounded-full flex items-center justify-center font-bold text-xl text-[#D96C3A]">1</div>
+              <div className="font-heading font-semibold mb-1">Discover</div>
+              <div className="text-[#F5F6FA]/80 font-body">We learn about your brand, goals, and audience.</div>
+            </div>
+            <div className="flex-1 text-center">
+              <div className="w-12 h-12 mx-auto mb-2 bg-[#FFB86C]/30 rounded-full flex items-center justify-center font-bold text-xl text-[#D96C3A]">2</div>
+              <div className="font-heading font-semibold mb-1">Design</div>
+              <div className="text-[#F5F6FA]/80 font-body">We craft a unique visual identity and digital experience.</div>
+            </div>
+            <div className="flex-1 text-center">
+              <div className="w-12 h-12 mx-auto mb-2 bg-[#FFB86C]/30 rounded-full flex items-center justify-center font-bold text-xl text-[#D96C3A]">3</div>
+              <div className="font-heading font-semibold mb-1">Launch</div>
+              <div className="text-[#F5F6FA]/80 font-body">We launch your project and support your growth.</div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* FAQ Section */}
+        <motion.section
+          className="max-w-3xl mx-auto glassmorphic rounded-3xl py-10 px-6 my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-heading font-bold mb-6 text-center">Frequently Asked Questions</h2>
+          <div className="text-left space-y-6">
+            <div>
+              <div className="font-heading font-semibold text-[#FFB86C]">How long does a typical project take?</div>
+              <div className="text-[#F5F6FA]/80 font-body">Most projects are completed in 4-8 weeks, depending on scope and feedback cycles.</div>
+            </div>
+            <div>
+              <div className="font-heading font-semibold text-[#FFB86C]">Do you offer payment plans?</div>
+              <div className="text-[#F5F6FA]/80 font-body">Yes, we offer flexible payment options for all packages.</div>
+            </div>
+            <div>
+              <div className="font-heading font-semibold text-[#FFB86C]">Can you help with ongoing support?</div>
+              <div className="text-[#F5F6FA]/80 font-body">Absolutely! We offer maintenance and support packages tailored to your needs.</div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Newsletter Signup Section */}
+        <motion.section
+          className="max-w-2xl mx-auto glassmorphic rounded-3xl py-8 px-6 text-center my-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-heading font-bold mb-4">Stay in the Loop</h2>
+          <p className="text-lg text-[#F5F6FA]/80 font-body mb-4">Subscribe for occasional updates, tips, and inspiration. No spam, ever.</p>
+          <form className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="rounded-full px-6 py-3 font-body text-[#181A20] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              required
+            />
+            <button
+              type="submit"
+              className="rounded-full glassmorphic gradient-accent text-[#181A20] px-8 py-3 font-semibold shadow border-none transition font-body backdrop-blur"
+            >
+              Subscribe
+            </button>
+          </form>
+        </motion.section>
+
         {/* CTA Strip */}
         <motion.section
-          className="max-w-2xl mx-auto flex justify-center items-center py-10"
+          className="max-w-2xl mx-auto flex justify-center items-center py-6 my-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
