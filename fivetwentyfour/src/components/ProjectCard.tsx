@@ -10,8 +10,8 @@ type ProjectCardProps = {
 export default function ProjectCard({ title, desc, image }: ProjectCardProps) {
   return (
     <motion.div
-      className="project-card glassmorphic rounded-3xl overflow-hidden shadow-xl cursor-pointer transition-transform duration-200 border border-white/10 w-[320px] h-[420px] sm:w-[340px] sm:h-[440px] flex"
-      whileHover={{ scale: 1.04, boxShadow: '0 8px 32px 0 rgba(31,38,135,0.10)' }}
+      className="project-card glassmorphic rounded-3xl overflow-hidden shadow-2xl shadow-black/20 cursor-pointer transition-transform duration-200 border border-white/10 w-[320px] h-[300px] sm:w-[340px] sm:h-[320px] flex hover:shadow-2xl hover:-translate-y-2"
+      whileHover={{ scale: 1.04, boxShadow: '0 12px 32px 0 rgba(31,38,135,0.10)' }}
       whileTap={{ scale: 0.98 }}
     >
       <div className="relative w-full h-full">

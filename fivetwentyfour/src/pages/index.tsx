@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
@@ -11,6 +11,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow, Pagination } from 'swiper/modules';
 
 export default function Home() {
+  const [expandedService, setExpandedService] = useState<null | number>(null);
+  const [modalProject, setModalProject] = useState<null | { title: string; desc: string; image: string }>(null);
+  const [pricingHover, setPricingHover] = useState<null | number>(null);
+  const [modalTeam, setModalTeam] = useState<null | { name: string; role: string; bio: string; photo: string }>(null);
   return (
     <>
       <Navbar />
@@ -50,6 +54,10 @@ export default function Home() {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.97 }}
                 className="rounded-full neumorphic px-8 py-3 font-semibold text-[#F5F6FA] border border-gray-200 shadow transition font-body"
+                onClick={() => {
+                  const el = document.getElementById('gallery-showcase');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 See Work
               </motion.button>
@@ -57,6 +65,10 @@ export default function Home() {
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.97 }}
                 className="rounded-full glassmorphic gradient-accent text-[#181A20] px-8 py-3 font-semibold shadow border-none transition font-body backdrop-blur"
+                onClick={() => {
+                  const el = document.getElementById('cta-contact');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 Start Your Project
               </motion.button>
@@ -88,17 +100,37 @@ export default function Home() {
           {["Strategy", "Design", "Launch"].map((service, i) => (
             <motion.div
               key={service}
-              className="neumorphic rounded-xl p-8 text-center cursor-pointer hover:scale-105 transition-transform duration-200"
-              whileHover={{ scale: 1.05, boxShadow: '0 8px 32px 0 rgba(31,38,135,0.10)' }}
+              className={`neumorphic rounded-xl p-8 text-center cursor-pointer transition-transform duration-200 relative ${expandedService === i ? 'z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl' : 'hover:scale-105'}`}
+              whileHover={expandedService === i ? {} : { scale: 1.05, boxShadow: '0 8px 32px 0 rgba(31,38,135,0.10)' }}
+              onClick={() => setExpandedService(expandedService === i ? null : i)}
+              tabIndex={0}
+              aria-expanded={expandedService === i}
+              aria-label={service + (expandedService === i ? ' details expanded' : '')}
             >
               <h3 className="text-[#FFB86C] text-xl font-semibold mb-2 font-heading">{service}</h3>
               <p className="text-[#F5F6FA]/80 font-body">{["Vision to voice", "Visual identity", "Websites that convert"][i]}</p>
+              {expandedService === i && (
+                <div className="mt-6 text-[#F5F6FA] text-base font-body animate-fade-in">
+                  {[
+                    'We help you clarify your brand vision, audience, and messaging. Workshops, research, and actionable strategy to set you apart.',
+                    'We craft a unique visual identity, logo, color palette, and design system that brings your brand to life across all touchpoints.',
+                    'We build and launch beautiful, high-converting websites and digital experiences, optimized for your goals and growth.'
+                  ][i]}
+                  <button
+                    className="block mx-auto mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
+                    onClick={e => { e.stopPropagation(); setExpandedService(null); }}
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
             </motion.div>
           ))}
         </motion.section>
 
         {/* Unique Carousel Gallery Section */}
         <motion.section
+          id="gallery-showcase"
           className="max-w-6xl mx-auto py-10 px-4 my-6 relative overflow-visible bg-transparent"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -169,13 +201,26 @@ export default function Home() {
                         <div className="w-full h-full flex items-stretch">
                           {/* Add a strong drop shadow to each card for float effect */}
                           <div className="shadow-2xl shadow-[#181A20]/60 rounded-3xl">
-                            <ProjectCard title={p.title} desc={p.desc} image={p.image} />
+                            <div onClick={() => setModalProject(p)}>
+                              <ProjectCard title={p.title} desc={p.desc} image={p.image} />
+                            </div>
                           </div>
                         </div>
                       </motion.div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
+              {/* Modal for project details */}
+              {modalProject && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setModalProject(null)}>
+                  <div className="bg-[#181A20] rounded-3xl p-8 max-w-lg w-full relative text-center border-2 border-orange-400 shadow-2xl animate-fade-in" onClick={e => e.stopPropagation()}>
+                    <img src={modalProject.image} alt={modalProject.title} className="w-full h-56 object-cover rounded-2xl mb-4" />
+                    <h3 className="text-2xl font-heading font-bold text-[#FFB86C] mb-2">{modalProject.title}</h3>
+                    <p className="text-[#F5F6FA] font-body mb-4">{modalProject.desc}</p>
+                    <button className="mt-2 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition" onClick={() => setModalProject(null)}>Close</button>
+                  </div>
+                </div>
+              )}
               {/* Custom navigation buttons, now visually outside the carousel */}
               <button
                 aria-label="Previous"
@@ -208,57 +253,162 @@ export default function Home() {
             <p className="text-[#FFB86C] text-lg font-medium opacity-85 font-body">Transparent packages for every stage of your brand journey.</p>
           </div>
           <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
-            <motion.div
-              className="flex-1 neumorphic rounded-2xl p-8 flex flex-col items-center text-center transition hover:scale-105 font-body"
-              whileHover={{ scale: 1.04 }}
-            >
-              <h3 className="text-[#FFB86C] text-lg font-semibold mb-2 font-heading">Brand Starter</h3>
-              <p className="text-[#F5F6FA]/80 mb-6">Logo, color palette, and basic brand guide to get you started.</p>
-              <div className="text-2xl font-bold text-[#FFB86C] mt-auto">$800</div>
-            </motion.div>
-            <motion.div
-              className="flex-1 glassmorphic border-2 border-orange-600 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center relative z-10 font-body"
-              whileHover={{ scale: 1.06 }}
-            >
-              <h3 className="text-[#FFB86C] text-lg font-semibold mb-2 font-heading">Website Launch</h3>
-              <p className="text-[#F5F6FA]/80 mb-6">Custom 1-5 page website, mobile responsive, and basic SEO.</p>
-              <div className="text-2xl font-bold text-[#FFB86C] mt-auto">$2,500</div>
-            </motion.div>
-            <motion.div
-              className="flex-1 neumorphic rounded-2xl p-8 flex flex-col items-center text-center transition hover:scale-105 font-body"
-              whileHover={{ scale: 1.04 }}
-            >
-              <h3 className="text-[#FFB86C] text-lg font-semibold mb-2 font-heading">Full Brand Suite</h3>
-              <p className="text-[#F5F6FA]/80 mb-6">Complete brand identity, website, and launch strategy.</p>
-              <div className="text-2xl font-bold text-[#FFB86C] mt-auto">$4,500</div>
-            </motion.div>
+            {[
+              {
+                name: 'Brand Starter',
+                desc: 'Logo, color palette, and basic brand guide to get you started.',
+                price: '$800',
+                details: 'Includes logo design, color palette, basic brand guide PDF, and one revision round.'
+              },
+              {
+                name: 'Website Launch',
+                desc: 'Custom 1-5 page website, mobile responsive, and basic SEO.',
+                price: '$2,500',
+                details: 'Includes design & development, mobile responsiveness, basic SEO, and 2 revision rounds.'
+              },
+              {
+                name: 'Full Brand Suite',
+                desc: 'Complete brand identity, website, and launch strategy.',
+                price: '$4,500',
+                details: 'Everything in Brand Starter + Website Launch, plus launch strategy session and 3 revision rounds.'
+              }
+            ].map((pkg, i) => (
+              <motion.div
+                key={pkg.name}
+                className={`flex-1 neumorphic rounded-2xl p-8 flex flex-col items-center text-center transition font-body relative ${pricingHover === i ? 'z-10 scale-105 bg-[#181A20]/90 border-2 border-orange-400 shadow-2xl' : 'hover:scale-105'}`}
+                whileHover={pricingHover === i ? {} : { scale: 1.04 }}
+                onMouseEnter={() => setPricingHover(i)}
+                onMouseLeave={() => setPricingHover(null)}
+                tabIndex={0}
+                aria-label={pkg.name + (pricingHover === i ? ' details expanded' : '')}
+              >
+                <h3 className="text-[#FFB86C] text-lg font-semibold mb-2 font-heading">{pkg.name}</h3>
+                <p className="text-[#F5F6FA]/80 mb-6">{pkg.desc}</p>
+                <div className="text-2xl font-bold text-[#FFB86C] mt-auto">{pkg.price}</div>
+                {pricingHover === i && (
+                  <div className="mt-4 text-[#F5F6FA] text-base font-body animate-fade-in">
+                    {pkg.details}
+                    <button
+                      className="block mx-auto mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
+                      onClick={() => {
+                        const el = document.getElementById('cta-contact');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      Get Started
+                    </button>
+                  </div>
+                )}
+              </motion.div>
+            ))}
           </div>
         </motion.section>
 
         {/* Values Section */}
         <motion.section
-          className="max-w-2xl mx-auto glassmorphic rounded-3xl py-8 px-6 text-center my-8 relative"
+          className="max-w-2xl mx-auto rounded-3xl py-8 px-6 text-center my-8 relative overflow-hidden border border-orange-200 shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <div className="w-16 h-1.5 bg-gradient-to-r from-orange-600 to-orange-700 rounded-full mx-auto mb-8"></div>
-          <h2 className="text-2xl font-heading font-bold mb-6">Small, nimble, built for the ambitious.</h2>
-          <p className="max-w-xl mx-auto text-lg text-[#F5F6FA]/80 font-body">We believe small businesses deserve big agency thinking. Human-centered, creative, and always approachable.</p>
+          {/* Video background */}
+          <div className="absolute inset-0 w-full h-full z-0 pointer-events-none rounded-3xl overflow-hidden">
+            <iframe
+              className="absolute top-1/2 left-1/2 opacity-40"
+              style={{
+                width: '177.78vh', // 100vh * (16/9)
+                height: '100vh',
+                minWidth: '100vw',
+                minHeight: '56.25vw', // 100vw * (9/16)
+                transform: 'translate(-50%, -50%)',
+                pointerEvents: 'none',
+                border: 0,
+                borderRadius: '1.5rem',
+              }}
+              src="https://www.youtube.com/embed/VwqzEqU7ss4?autoplay=1&mute=1&loop=1&playlist=VwqzEqU7ss4&controls=0&showinfo=0&modestbranding=1&rel=0"
+              title="YouTube video background"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+            {/* Gradient overlay for readability */}
+            <div className="absolute inset-0 rounded-3xl" style={{ background: 'linear-gradient(120deg, rgba(255,184,108,0.32) 0%, rgba(217,108,58,0.32) 100%)', pointerEvents: 'none' }} />
+          </div>
+          <div className="relative z-10">
+            <div className="w-16 h-1.5 bg-gradient-to-r from-orange-600 to-orange-700 rounded-full mx-auto mb-8"></div>
+            <h2 className="text-2xl font-heading font-bold mb-6">Small, nimble, built for the ambitious.</h2>
+            <p className="max-w-xl mx-auto text-lg text-[#F5F6FA]/80 font-body">We believe small businesses deserve big agency thinking. Human-centered, creative, and always approachable.</p>
+            <button
+              className="mt-6 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition"
+              onClick={() => {
+                const el = document.getElementById('about-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Learn More
+            </button>
+          </div>
         </motion.section>
 
         {/* About/Team Section */}
         <motion.section
           className="max-w-3xl mx-auto glassmorphic rounded-3xl py-10 px-6 text-center my-8"
+          id="about-section"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <h2 className="text-2xl font-heading font-bold mb-4">About Us</h2>
-          <p className="text-lg text-[#F5F6FA]/80 font-body mb-4">We are a passionate team of designers, strategists, and technologists dedicated to helping soulful brands shine online. Our mission is to bring big agency thinking to small businesses, with a personal touch.</p>
-          {/* Optionally add a team photo or founder image here */}
+          <p className="text-lg text-[#F5F6FA]/80 font-body mb-8">We are a passionate team of designers, strategists, and technologists dedicated to helping soulful brands shine online. Our mission is to bring big agency thinking to small businesses, with a personal touch.</p>
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mt-8">
+            {[
+              {
+                name: 'Ryan Tang',
+                role: 'Founder & Creative Director',
+                bio: 'Ryan leads the creative vision and strategy for every project, blending design, tech, and business insight.',
+                photo: '/assets/work1.avif'
+              },
+              {
+                name: 'Alex Kim',
+                role: 'Lead Designer',
+                bio: 'Alex crafts beautiful, user-centered designs and ensures every brand stands out visually.',
+                photo: '/assets/work2.avif'
+              },
+              {
+                name: 'Jamie Lee',
+                role: 'Web Developer',
+                bio: 'Jamie brings ideas to life with clean, scalable code and a passion for performance.',
+                photo: '/assets/work3.avif'
+              }
+            ].map((member, i) => (
+              <motion.div
+                key={member.name}
+                className="flex flex-col items-center bg-[#181A20]/80 rounded-2xl p-6 shadow-lg border border-orange-200 cursor-pointer hover:scale-105 transition-transform w-56"
+                whileHover={{ scale: 1.07 }}
+                onClick={() => setModalTeam(member)}
+                tabIndex={0}
+                aria-label={member.name + ' bio'}
+              >
+                <img src={member.photo} alt={member.name} className="w-20 h-20 rounded-full object-cover mb-3 border-2 border-[#FFB86C]" />
+                <div className="font-heading text-lg text-[#FFB86C] font-bold mb-1">{member.name}</div>
+                <div className="text-[#F5F6FA]/80 font-body text-sm mb-1">{member.role}</div>
+                <div className="text-[#F5F6FA]/60 font-body text-xs">Click for bio</div>
+              </motion.div>
+            ))}
+          </div>
+          {/* Modal for team member bio */}
+          {modalTeam && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setModalTeam(null)}>
+              <div className="bg-[#181A20] rounded-3xl p-8 max-w-md w-full relative text-center border-2 border-orange-400 shadow-2xl animate-fade-in" onClick={e => e.stopPropagation()}>
+                <img src={modalTeam.photo} alt={modalTeam.name} className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-[#FFB86C]" />
+                <h3 className="text-xl font-heading font-bold text-[#FFB86C] mb-1">{modalTeam.name}</h3>
+                <div className="text-[#F5F6FA]/80 font-body mb-2">{modalTeam.role}</div>
+                <p className="text-[#F5F6FA] font-body mb-4">{modalTeam.bio}</p>
+                <button className="mt-2 rounded-full px-6 py-2 bg-[#FFB86C] text-[#181A20] font-semibold shadow hover:bg-orange-400 transition" onClick={() => setModalTeam(null)}>Close</button>
+              </div>
+            </div>
+          )}
         </motion.section>
 
         {/* Client Logos / Past Clients Section */}
@@ -382,6 +532,7 @@ export default function Home() {
         {/* CTA Strip */}
         <motion.section
           className="max-w-2xl mx-auto flex justify-center items-center py-6 my-4"
+          id="cta-contact"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

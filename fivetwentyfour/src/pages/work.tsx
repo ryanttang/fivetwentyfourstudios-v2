@@ -38,20 +38,20 @@ export default function Work() {
         </h1>
         {/* Carousel Showcase Section */}
         <motion.section
-          className="max-w-6xl mx-auto glassmorphic rounded-3xl py-20 px-4 my-8 shadow-lg relative overflow-hidden"
+          className="max-w-6xl mx-auto rounded-none py-4 px-0 mb-1 mt-4 relative overflow-visible bg-transparent shadow-none"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
           <motion.div
-            className="relative mb-8 flex justify-center"
+            className="relative mb-1 flex justify-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
           >
-            <div className="w-full max-w-5xl px-2 sm:px-4">
-              <div className="glassmorphic gradient-glass rounded-2xl p-4 shadow-xl">
+            <div className="w-full max-w-5xl px-0 sm:px-0">
+              <div className="rounded-none p-0 shadow-none bg-transparent">
                 <Swiper
                   modules={[Navigation]}
                   navigation={{
@@ -65,7 +65,7 @@ export default function Work() {
                     640: { slidesPerView: 2, spaceBetween: 16 },
                     1024: { slidesPerView: 3, spaceBetween: 24 },
                   }}
-                  className="!pb-2 min-h-[440px]"
+                  className="!pb-1 min-h-[220px]"
                 >
                   {projects.map((p, i) => (
                     <SwiperSlide key={i} className="flex justify-center items-center w-full h-full">
@@ -83,7 +83,7 @@ export default function Work() {
                     </SwiperSlide>
                   ))}
                   {/* Custom navigation buttons */}
-                  <button
+                  {/* <button
                     aria-label="Previous"
                     className="custom-swiper-prev absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-20 neumorphic text-[#FFB86C] shadow-lg p-3 hover:bg-[#FFB86C]/10 border border-orange-200 transition"
                     style={{}}
@@ -96,7 +96,7 @@ export default function Work() {
                     style={{}}
                   >
                     <span className="text-2xl">&#8594;</span>
-                  </button>
+                  </button> */}
                 </Swiper>
               </div>
             </div>
