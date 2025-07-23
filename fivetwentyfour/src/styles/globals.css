@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add custom styles below this line if needed */
+
+body {
+  @apply bg-[#181A20] text-[#F5F6FA] font-body;
+}
+
+dark body {
+  background: #181A20;
+  color: #F5F6FA;
+}
+
+/* Neumorphic effect */
+.neumorphic {
+  background: #23262F;
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 24px #181A20, -8px -8px 24px #2a2d3a;
+}
+
+.neumorphic-inset {
+  background: #23262F;
+  border-radius: 1.5rem;
+  box-shadow: inset 6px 6px 16px #181A20, inset -6px -6px 16px #2a2d3a;
+}
+
+/* Glassmorphic effect */
+.glassmorphic {
+  background: rgba(35, 38, 47, 0.55);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(24, 26, 32, 0.32);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Font utility classes */
+.font-heading {
+  font-family: 'Canela', 'Migra', 'Georgia', serif;
+}
+.font-body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+} 
