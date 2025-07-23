@@ -6,60 +6,75 @@
 
 body {
   @apply bg-gradient-to-br from-[#181A20] via-[#23262F] to-[#1a1d23] text-[#F5F6FA] font-body;
-  background-image: url('/assets/water-bg.jpg'), linear-gradient(to bottom right, #181A20, #23262F, #1a1d23);
-  background-size: cover, 100% 100%;
+  background-image:
+    url("/assets/water-bg.jpg"),
+    linear-gradient(to bottom right, #181a20, #23262f, #1a1d23);
+  background-size:
+    cover,
+    100% 100%;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
   background-blend-mode: overlay;
 }
 
 dark body {
-  background: #181A20;
-  color: #F5F6FA;
+  background: #181a20;
+  color: #f5f6fa;
 }
 
 /* Neumorphic effect */
 .neumorphic {
   background: #2d3038;
   border-radius: 1.5rem;
-  box-shadow: 0 1px 4px 0 rgba(255,255,255,0.05), 4px 4px 8px #181A20, -4px -4px 8px #31344a, 1px 1px 3px #181A20 inset, -1px -1px 3px #393c54 inset;
+  box-shadow:
+    0 1px 4px 0 rgba(255, 255, 255, 0.05),
+    4px 4px 8px #181a20,
+    -4px -4px 8px #31344a,
+    1px 1px 3px #181a20 inset,
+    -1px -1px 3px #393c54 inset;
   border: 1.5px solid rgba(255, 255, 255, 0.08);
 }
 
 .neumorphic-inset {
-  background: #23262F;
+  background: #23262f;
   border-radius: 1.5rem;
-  box-shadow: inset 2px 2px 5px #181A20, inset -2px -2px 5px #2a2d3a;
+  box-shadow:
+    inset 2px 2px 5px #181a20,
+    inset -2px -2px 5px #2a2d3a;
 }
 
 /* Glassmorphic effect */
 .glassmorphic {
   background: rgba(35, 38, 47, 0.32);
   border-radius: 1.5rem;
-  box-shadow: 0 1px 6px 0 rgba(24, 26, 32, 0.10);
+  box-shadow: 0 1px 6px 0 rgba(24, 26, 32, 0.1);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Font utility classes */
 .font-heading {
-  font-family: 'Canela', 'Migra', 'Georgia', serif;
+  font-family: "Canela", "Migra", "Georgia", serif;
 }
 .font-body {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
 }
 
 .gradient-accent {
-  background: linear-gradient(90deg, #FFB86C 0%, #FF9F43 100%);
+  background: linear-gradient(90deg, #ffb86c 0%, #ff9f43 100%);
 }
 
 .gradient-glass {
-  background: linear-gradient(120deg, rgba(255,184,108,0.12) 0%, rgba(35,38,47,0.7) 100%);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 184, 108, 0.12) 0%,
+    rgba(35, 38, 47, 0.7) 100%
+  );
 }
 
 .gradient-border {
-  border-image: linear-gradient(90deg, #FFB86C 0%, #FF9F43 100%);
+  border-image: linear-gradient(90deg, #ffb86c 0%, #ff9f43 100%);
   border-image-slice: 1;
 }
 
@@ -67,7 +82,7 @@ div.youtube-bg-wrapper {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-} 
+}
 
 /* Project Detail Page Custom Classes */
 .project-detail-container {
@@ -81,30 +96,37 @@ div.youtube-bg-wrapper {
 .project-detail-glass {
   background: rgba(35, 38, 47, 0.32);
   border-radius: 1.5rem;
-  box-shadow: 0 1px 6px 0 rgba(24, 26, 32, 0.10);
+  box-shadow: 0 1px 6px 0 rgba(24, 26, 32, 0.1);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   margin: 0 auto;
   padding: 2rem;
 }
 
 .project-detail-back-btn {
-  background: #23262F;
+  background: #23262f;
   border-radius: 1.5rem;
-  box-shadow: 0 1px 4px 0 rgba(255,255,255,0.05), 4px 4px 8px #181A20, -4px -4px 8px #31344a, 1px 1px 3px #181A20 inset, -1px -1px 3px #393c54 inset;
+  box-shadow:
+    0 1px 4px 0 rgba(255, 255, 255, 0.05),
+    4px 4px 8px #181a20,
+    -4px -4px 8px #31344a,
+    1px 1px 3px #181a20 inset,
+    -1px -1px 3px #393c54 inset;
   border: 1.5px solid rgba(255, 255, 255, 0.08);
-  color: #FFB86C;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  color: #ffb86c;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   padding: 0.75rem 2rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .project-detail-back-btn:hover {
-  background: #FFB86C;
-  color: #23262F;
+  background: #ffb86c;
+  color: #23262f;
 }
 
 /* Gradient overlay for card hover */
@@ -113,7 +135,11 @@ div.youtube-bg-wrapper {
   inset: 0;
   pointer-events: none;
   border-radius: 1.5rem;
-  background: linear-gradient(120deg, rgba(255,184,108,0.18) 0%, rgba(255,159,67,0.18) 100%);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 184, 108, 0.18) 0%,
+    rgba(255, 159, 67, 0.18) 100%
+  );
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 2;
@@ -134,4 +160,4 @@ div.youtube-bg-wrapper {
 /* .font-body: Body font family */
 /* .youtube-bg-wrapper: Wrapper for YouTube video backgrounds */
 /* .project-card: Card for project showcase */
-/* .custom-swiper-prev, .custom-swiper-next, .custom-swiper-pagination: Swiper navigation and pagination */ 
+/* .custom-swiper-prev, .custom-swiper-next, .custom-swiper-pagination: Swiper navigation and pagination */

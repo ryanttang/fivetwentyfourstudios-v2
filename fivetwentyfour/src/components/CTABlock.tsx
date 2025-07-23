@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 type CTABlockProps = {
   text: string;
@@ -25,4 +25,4 @@ export default function CTABlock({ text, buttonText }: CTABlockProps) {
       </motion.button>
     </motion.div>
   );
-} 
+}

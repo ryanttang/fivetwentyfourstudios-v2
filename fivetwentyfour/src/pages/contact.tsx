@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -23,14 +23,19 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-[#FFB86C] text-center drop-shadow-lg">Contact</h1>
+          <h1 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-[#FFB86C] text-center drop-shadow-lg">
+            Contact
+          </h1>
           <p className="text-lg text-[#F5F6FA]/90 font-body text-center mb-8 max-w-md">
-            Tell me what you're dreaming up. I’ll help make it real.<br />
-            Fill out the form and I’ll get back to you soon.
+            Tell me what you&apos;re dreaming up. I&apos;ll help make it real.
+            <br />
+            Fill out the form and I&apos;ll get back to you soon.
           </p>
           {submitted ? (
             <div className="neumorphic-inset rounded-2xl p-8 text-center text-[#FFB86C] font-heading text-xl shadow-inner w-full">
-              Thank you for reaching out!<br />I’ll be in touch soon.
+              Thank you for reaching out!
+              <br />
+              I’ll be in touch soon.
             </div>
           ) : (
             <form
@@ -75,4 +80,4 @@ export default function Contact() {
       <Footer />
     </>
   );
-} 
+}
